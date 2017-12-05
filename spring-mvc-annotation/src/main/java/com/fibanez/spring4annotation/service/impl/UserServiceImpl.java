@@ -1,16 +1,17 @@
-package com.fibanez.spring4annotation.service;
+package com.fibanez.spring4annotation.service.impl;
 
 import java.util.List;
 
 import com.fibanez.spring4annotation.dao.UserDao;
 import com.fibanez.spring4annotation.model.User;
+import com.fibanez.spring4annotation.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service("userService")
 @Transactional
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao dao;

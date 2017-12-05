@@ -1,5 +1,7 @@
-package com.fibanez.spring4annotation.dao;
+package com.fibanez.spring4annotation.dao.impl;
 
+import com.fibanez.spring4annotation.dao.AbstractDao;
+import com.fibanez.spring4annotation.dao.UserProfileDao;
 import com.fibanez.spring4annotation.model.UserProfile;
 import org.springframework.stereotype.Repository;
 
@@ -8,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Repository("userProfileDao")
-public class UserProfileDaoImpl extends AbstractDao<Integer, UserProfile>implements UserProfileDao{
+public class UserProfileDaoImpl extends AbstractDao<Integer, UserProfile> implements UserProfileDao {
 
     public UserProfile findById(int id) {
         return getByKey(id);

@@ -1,10 +1,12 @@
-package com.fibanez.spring4annotation.dao;
+package com.fibanez.spring4annotation.dao.impl;
 
 import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.NoResultException;
 
+import com.fibanez.spring4annotation.dao.AbstractDao;
+import com.fibanez.spring4annotation.dao.UserDao;
 import com.fibanez.spring4annotation.model.User;
 import org.springframework.stereotype.Repository;
 
