@@ -1,7 +1,7 @@
 package com.fibanez.spring4annotation.converter;
 
 import com.fibanez.spring4annotation.model.UserProfile;
-import com.fibanez.spring4annotation.service.UserProfileService;
+import com.fibanez.spring4annotation.web.service.UserProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;

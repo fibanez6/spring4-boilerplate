@@ -1,4 +1,4 @@
-package com.fibanez.spring4annotation.controler;
+package com.fibanez.spring4annotation.web.controler;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

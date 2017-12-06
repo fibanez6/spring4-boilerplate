@@ -58,6 +58,12 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
         delete(user);
     }
 
+    public void deleteAllUsers() {
+        getEntityManager()
+                .createQuery("DELETE FROM User")
+                .executeUpdate();
+    }
+
     //An alternative to Hibernate.initialize()
     protected void initializeCollection(Collection<?> collection) {
         if(collection == null) {

@@ -1,4 +1,4 @@
-package com.fibanez.spring4annotation.service;
+package com.fibanez.spring4annotation.web.service;
 
 import com.fibanez.spring4annotation.model.UserProfile;
 

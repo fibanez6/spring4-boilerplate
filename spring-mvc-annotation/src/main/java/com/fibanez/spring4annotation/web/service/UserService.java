@@ -1,4 +1,4 @@
-package com.fibanez.spring4annotation.service;
+package com.fibanez.spring4annotation.web.service;
 
 import com.fibanez.spring4annotation.model.User;
 
@@ -19,5 +19,9 @@ public interface UserService {
     List<User> findAllUsers();
 
     boolean isUserSSOUnique(Integer id, String sso);
+
+    boolean isUserExist(User user);
+
+    void deleteAllUsers();
 
 }

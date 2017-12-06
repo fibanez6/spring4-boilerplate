@@ -1,10 +1,10 @@
-package com.fibanez.spring4annotation.service.impl;
+package com.fibanez.spring4annotation.web.service.impl;
 
 import java.util.List;
 
 import com.fibanez.spring4annotation.dao.UserProfileDao;
 import com.fibanez.spring4annotation.model.UserProfile;
-import com.fibanez.spring4annotation.service.UserProfileService;
+import com.fibanez.spring4annotation.web.service.UserProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

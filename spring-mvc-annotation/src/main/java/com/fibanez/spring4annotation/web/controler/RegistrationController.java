@@ -1,4 +1,4 @@
-package com.fibanez.spring4annotation.controler;
+package com.fibanez.spring4annotation.web.controler;
 
 import java.util.List;
 import java.util.Locale;
@@ -7,8 +7,8 @@ import javax.validation.Valid;
 
 import com.fibanez.spring4annotation.model.User;
 import com.fibanez.spring4annotation.model.UserProfile;
-import com.fibanez.spring4annotation.service.UserProfileService;
-import com.fibanez.spring4annotation.service.UserService;
+import com.fibanez.spring4annotation.web.service.UserProfileService;
+import com.fibanez.spring4annotation.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @Controller
 @RequestMapping("/")
 @SessionAttributes("roles")
-public class AppController {
+public class RegistrationController {
 
     @Autowired
     UserService userService;

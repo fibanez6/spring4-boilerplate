@@ -1,10 +1,10 @@
-package com.fibanez.spring4annotation.service.impl;
+package com.fibanez.spring4annotation.web.service.impl;
 
 import java.util.List;
 
 import com.fibanez.spring4annotation.dao.UserDao;
 import com.fibanez.spring4annotation.model.User;
-import com.fibanez.spring4annotation.service.UserService;
+import com.fibanez.spring4annotation.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,6 +58,15 @@ public class UserServiceImpl implements UserService {
     public boolean isUserSSOUnique(Integer id, String sso) {
         User user = findBySSO(sso);
         return ( user == null || ((id != null) && (user.getId() == id)));
+    }
+
+    public boolean isUserExist(User user) {
+        User userDB = dao.findBySSO(user.getSsoId());
+        return userDB !=null;
+    }
+
+    public void deleteAllUsers(){
+        dao.deleteAllUsers();
     }
 
 }

@@ -1,6 +1,7 @@
-package com.fibanez.spring4annotation.configuration;
+package com.fibanez.spring4security.configuration;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
 import javax.servlet.Filter;
 
 public class SpringInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -22,7 +23,7 @@ public class SpringInitializer extends AbstractAnnotationConfigDispatcherServlet
 
     @Override
     protected Filter[] getServletFilters() {
-        Filter [] singleton = {};
+        Filter [] singleton = { new CORSFilter()};
         return singleton;
     }
 
