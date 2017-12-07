@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.fibanez.spring4basic.")
+@ComponentScan(basePackages = "com.fibanez.spring4basic")
 public class AppConfig extends WebMvcConfigurerAdapter{
 
 //    @Bean

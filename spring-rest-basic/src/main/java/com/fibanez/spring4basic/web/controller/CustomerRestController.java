@@ -47,9 +47,9 @@ public class CustomerRestController {
             return ResponseEntity.badRequest().body(result.getAllErrors().iterator().next());
         }
 
-        customerService.create(customer);
+        Customer customerCreated = customerService.create(customer);
 
-        return new ResponseEntity(customer, HttpStatus.OK);
+        return new ResponseEntity(customerCreated, HttpStatus.OK);
     }
 
     @DeleteMapping("/customers/{id}")
