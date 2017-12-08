@@ -31,7 +31,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {TestContext.class})
 @WebAppConfiguration
@@ -141,7 +140,7 @@ public class CustomerRestControllerTest {
         mockMvc.perform(
                 post("/customers")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED))
-                .andDo(print())
+//                .andDo(print())
                 .andExpect(status().isUnsupportedMediaType());
     }
 
@@ -152,7 +151,7 @@ public class CustomerRestControllerTest {
                 post("/customers")
                         .content("")
                         .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
+//                .andDo(print())
                 .andExpect(status().isBadRequest())
                 ;
     }
@@ -171,8 +170,11 @@ public class CustomerRestControllerTest {
                         .content(jsonCustomer)
                         .contentType(MediaType.APPLICATION_JSON)
                 )
-                .andDo(print())
+//                .andDo(print())
                 .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.objectName", is("customer")) )
+                .andExpect(jsonPath("$.field", is("firstName")) )
+                .andExpect(jsonPath("$.defaultMessage", is("size must be between 3 and 30")) )
                 ;
     }
 
