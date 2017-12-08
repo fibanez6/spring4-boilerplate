@@ -1,4 +1,4 @@
-package com.fibanez.spring4basic.utils;
+package utils;
 
 import org.springframework.http.MediaType;
 

@@ -2,7 +2,7 @@ package unit.com.fibanez.spring4basic.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fibanez.spring4basic.model.Customer;
-import unit.com.fibanez.spring4basic.utils.TestUtil;
+import utils.TestUtil;
 import com.fibanez.spring4basic.web.controller.CustomerRestController;
 import com.fibanez.spring4basic.web.service.CustomerService;
 import com.fibanez.spring4basic.web.validator.CustomerValidator;
@@ -32,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @RunWith(MockitoJUnitRunner.class)
-public class CustomerRestControllerTest {
+public class CustomerRestControllerMockTest {
 
     private MockMvc mockMvc;
 

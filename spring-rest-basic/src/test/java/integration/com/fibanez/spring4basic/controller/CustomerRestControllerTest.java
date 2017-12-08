@@ -1,21 +1,23 @@
-package com.fibanez.spring4basic.web.controller;
+package integration.com.fibanez.spring4basic.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fibanez.spring4basic.model.Customer;
-import com.fibanez.spring4basic.utils.TestUtil;
 import com.fibanez.spring4basic.web.service.CustomerService;
-import com.fibanez.spring4basic.web.validator.CustomerValidator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+import integration.com.fibanez.spring4basic.utils.TestContext;
+import utils.TestUtil;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -30,24 +32,30 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {TestContext.class})
+@WebAppConfiguration
 public class CustomerRestControllerTest {
 
     private MockMvc mockMvc;
 
-    @Mock
-    private CustomerService customerService;
+    @Autowired
+    private CustomerService customerServiceMock;
 
-    @InjectMocks
-    private CustomerRestController restController;
+    @Autowired
+    private WebApplicationContext webApplicationContext;
+
 
     private ObjectMapper mapper = new ObjectMapper();
 
     @Before
     public void setUp() {
-        mockMvc = MockMvcBuilders.standaloneSetup(restController)
-                .setValidator(new CustomerValidator())
-                .build();
+        //We have to reset our mock between tests because the mock objects
+        //are managed by the Spring container. If we would not reset them,
+        //stubbing and verified behavior would "leak" from one test to another.
+        reset(customerServiceMock);
+
+        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
 
     @After
@@ -57,15 +65,16 @@ public class CustomerRestControllerTest {
 
     @Test
     public void when_list_expected_ok() throws Exception{
-        when(customerService.list()).thenReturn(null);
+        when(customerServiceMock.list()).thenReturn(null);
 
         mockMvc.perform(get("/customers"))
+//                .andDo(print())
                 .andExpect(status().isOk());
     }
 
     @Test
     public void when_anyMediaType_expected_ok() throws Exception{
-        when(customerService.list()).thenReturn(null);
+        when(customerServiceMock.list()).thenReturn(null);
 
         mockMvc.perform(get("/customers")
                 .contentType(MediaType.APPLICATION_XML))
@@ -74,7 +83,7 @@ public class CustomerRestControllerTest {
 
     @Test
     public void when_list_expected_jsonMediaType() throws Exception{
-        when(customerService.list()).thenReturn(Collections.emptyList());
+        when(customerServiceMock.list()).thenReturn(Collections.emptyList());
 
         mockMvc.perform(get("/customers"))
                 .andExpect(status().isOk())
@@ -86,7 +95,7 @@ public class CustomerRestControllerTest {
     public void when_list_expected_jsonDataSize1() throws Exception{
         List customers = Arrays.asList(new Customer(101l, "John", "Doe", "djohn@gmail.com", "121-232-3435", null));
 
-        when(customerService.list()).thenReturn(customers);
+        when(customerServiceMock.list()).thenReturn(customers);
 
         mockMvc.perform(get("/customers"))
                 .andExpect(status().isOk())
@@ -102,7 +111,7 @@ public class CustomerRestControllerTest {
 
         List customers = Arrays.asList(mockCustomer);
 
-        when(customerService.list()).thenReturn(customers);
+        when(customerServiceMock.list()).thenReturn(customers);
 
         mockMvc.perform(get("/customers"))
                 .andExpect(status().isOk())
@@ -117,8 +126,8 @@ public class CustomerRestControllerTest {
                 .andExpect(jsonPath("$[0].address", is(nullValue()) ))
                 ;
 
-        verify(customerService, times(1)).list();
-        verifyNoMoreInteractions(customerService);
+        verify(customerServiceMock, times(1)).list();
+        verifyNoMoreInteractions(customerServiceMock);
 
     }
 
@@ -148,8 +157,12 @@ public class CustomerRestControllerTest {
                 ;
     }
 
+    /**
+     * This checks the @valid on method
+     * @throws Exception
+     */
     @Test
-    public void when_createCustomerWithoutFirstname_throws_badRequest() throws Exception{
+    public void when_createCustomerNullFirstname_throws_badRequest() throws Exception{
         Customer mockCustomer = new Customer(101l, "", "Doe", "djohn@gmail.com", "121-232-3435", null);
         String jsonCustomer = mapper.writeValueAsString(mockCustomer);
 
@@ -158,6 +171,7 @@ public class CustomerRestControllerTest {
                         .content(jsonCustomer)
                         .contentType(MediaType.APPLICATION_JSON)
                 )
+                .andDo(print())
                 .andExpect(status().isBadRequest())
                 ;
     }
@@ -169,7 +183,7 @@ public class CustomerRestControllerTest {
 
 
         mockCustomer.setId(123l);
-        when(customerService.create(any())).thenReturn(mockCustomer);
+        when(customerServiceMock.create(any())).thenReturn(mockCustomer);
 
 
         ResultActions result =  mockMvc.perform(
@@ -187,8 +201,11 @@ public class CustomerRestControllerTest {
                 .andExpect(jsonPath("$.address", is(nullValue()) ))
                 ;
 
-        verify(customerService, times(1)).create(any());
-        verifyNoMoreInteractions(customerService);
+        verify(customerServiceMock, times(1)).create(any());
+        verifyNoMoreInteractions(customerServiceMock);
     }
+
+
+    // TODO add MORE
 
 }

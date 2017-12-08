@@ -1,4 +1,4 @@
-package com.fibanez.spring4basic.utils;
+package integration.com.fibanez.spring4basic.utils;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.StaticMessageSource;
@@ -24,7 +24,7 @@ public final class WebTestConfig {
         Properties exceptionMappings = new Properties();
 
         exceptionMappings.put(
-                "net.petrikainulainen.spring.testmvc.todo.exception.TodoNotFoundException",
+                "com.fibanez.spring4basic.exception.TodoNotFoundException",
                 "error/404"
         );
         exceptionMappings.put("java.lang.Exception", "error/error");
