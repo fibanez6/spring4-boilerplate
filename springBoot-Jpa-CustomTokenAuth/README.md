@@ -42,6 +42,7 @@ Never write another getter or equals method again.
 While most users identify Swagger by the Swagger UI tool, the Swagger toolset includes support for automated documentation, code generation, and test case generation.
 
 * **h2** version 1.4.196
+  > [H2](http://www.h2database.com/html/main.html) is a relational database management system written in Java. It can be embedded in Java applications or run in the client-server mode.
 
 ### Spring Boot configuration
 ```
