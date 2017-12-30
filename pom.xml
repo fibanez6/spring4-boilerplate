@@ -13,8 +13,5 @@
         <module>spring-mvc-xml</module>
         <module>spring-rest-security</module>
         <module>spring-rest-basic</module>
-        <module>springBoot-Jpa-CustomTokenAuth</module>
     </modules>
-
-
 </project>
